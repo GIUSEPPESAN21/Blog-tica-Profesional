@@ -26,12 +26,12 @@ st.markdown("""
     /* Hero Banner Principal */
     .hero-banner {
         background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
-        padding: 3.5rem 2rem;
-        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        border-radius: 12px;
         color: white;
         text-align: center;
-        margin-bottom: 2rem;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        margin-bottom: 1.5rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         position: relative;
         overflow: hidden;
     }
@@ -49,8 +49,8 @@ st.markdown("""
         pointer-events: none;
     }
 
-    .hero-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -1px; line-height: 1.2; }
-    .hero-subtitle { font-size: 1.3rem; font-weight: 300; color: #cbd5e1; margin-bottom: 1.5rem; }
+    .hero-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -1px; line-height: 1.2; }
+    .hero-subtitle { font-size: 1.15rem; font-weight: 300; color: #cbd5e1; margin-bottom: 1.2rem; }
     
     /* Tarjetas de Contenido (Cards) */
     .glass-card {
