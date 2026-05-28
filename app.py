@@ -2,203 +2,207 @@ import streamlit as st
 import pandas as pd
 import time
 
-# Configuración inicial de la página (Debe ser el primer comando de Streamlit)
+# Configuración inicial de la página (Debe ser el primer comando)
 st.set_page_config(
-    page_title="Optimizando con Dignidad | Ética Profesional",
+    page_title="Optimizando con Dignidad | Ética en Ingeniería",
     page_icon="⚙️",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed" # Ocultamos el sidebar por defecto
 )
 
 st.markdown("""
     <style>
-    /* Estilos para textos justificados y citas */
-    .justified-text { text-align: justify; font-size: 1.15rem; line-height: 1.7; color: #334155; }
-    .quote-box { background-color: #f8fafc; border-left: 6px solid #0284c7; padding: 20px; font-style: italic; margin-bottom: 25px; border-radius: 0 8px 8px 0; box-shadow: 2px 2px 10px rgba(0,0,0,0.05); }
-    .highlight { color: #0284c7; font-weight: 700; }
+    /* Ocultar el botón del sidebar y el sidebar completo para forzar navegación superior */
+    [data-testid="collapsedControl"] { display: none; }
+    [data-testid="stSidebar"] { display: none; }
     
-    /* Estilo para disimular los radio buttons y que parezcan un menú */
-    div.row-widget.stRadio > div { background-color: #f1f5f9; padding: 15px; border-radius: 10px; }
+    /* Estilos para tipografía y contenedores */
+    .main-title { font-size: 2.8rem; font-weight: 800; color: #0f172a; margin-bottom: 0px; }
+    .sub-title { font-size: 1.4rem; font-weight: 400; color: #475569; margin-bottom: 30px; }
+    .justified-text { text-align: justify; font-size: 1.15rem; line-height: 1.7; color: #334155; }
+    .quote-box { background-color: #f8fafc; border-left: 6px solid #2563eb; padding: 25px; font-style: italic; margin: 20px 0; border-radius: 0 8px 8px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .highlight { color: #2563eb; font-weight: 700; }
+    
+    /* Personalización de las pestañas (Tabs) de Streamlit para que parezcan un menú de navegación */
+    .stTabs [data-baseweb="tab-list"] { gap: 8px; background-color: #f1f5f9; padding: 10px 10px 0 10px; border-radius: 10px 10px 0 0; }
+    .stTabs [data-baseweb="tab"] { height: 50px; white-space: pre-wrap; background-color: transparent; border-radius: 8px 8px 0 0; gap: 4px; padding-top: 10px; padding-bottom: 10px; font-weight: 600; }
+    .stTabs [aria-selected="true"] { background-color: #ffffff; color: #2563eb; border-bottom: 3px solid #2563eb; }
     </style>
 """, unsafe_allow_html=True)
 
-with st.sidebar:
-    # Logo de UNIMINUTO (Cargado desde una URL pública)
-    st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Uniminuto_logo.svg/1200px-Uniminuto_logo.svg.png", width=160)
-    
-    st.markdown("### 📚 Información Académica")
-    st.markdown("**Materia:** Ética Profesional")
-    st.markdown("**NRC:** 10-84364")
-    st.markdown("**Docente:** LUIS ALEXANDER APONTE ROJAS")
-    st.markdown("**Estudiante(s):** [ESCRIBE TU NOMBRE COMPLETO AQUÍ]") 
-    
-    st.divider()
-    
-    st.markdown("### 🧭 Navegación del Blog")
-    # Este menú interactivo controla qué parte del código se ejecuta y se muestra
-    seccion = st.radio(
-        "Selecciona un capítulo:",
-        ("1. Inicio y Contexto", 
-         "2. El 'Bien Interno'", 
-         "3. Más allá de Taylor (Kant)", 
-         "4. Enfoque de Capacidades", 
-         "5. Ética Discursiva",
-         "6. 🎮 Dilema Interactivo",
-         "7. Conclusión y Referencias")
-    )
-    
-    st.divider()
-    st.caption("© 2026 - Proyecto Final de Ética Profesional. Desplegado en Python/Streamlit.")
+# Cabecera principal
+st.markdown('<p class="main-title">⚙️ Optimizando con Dignidad</p>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">La Revolución Ética de la Ingeniería Industrial en la Era de las Capacidades</p>', unsafe_allow_html=True)
 
-if seccion == "1. Inicio y Contexto":
-    st.title("⚙️ Optimizando con Dignidad")
-    st.subheader("La Revolución Ética de la Ingeniería Industrial en la Era de las Capacidades")
-    st.info("**Audiencia Objetivo:** Alta Dirección de Operaciones y Estudiantes Universitarios de Ingeniería.")
+# Panel desplegable para la información académica (Limpio y no invasivo)
+with st.expander("🎓 Información Académica - Proyecto Final de Ética Profesional", expanded=False):
+    col_a, col_b, col_c = st.columns([1, 2, 2])
+    with col_a:
+        st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Uniminuto_logo.svg/1200px-Uniminuto_logo.svg.png", width=120)
+    with col_b:
+        st.markdown("**Materia:** Ética Profesional")
+        st.markdown("**NRC:** 10-84364")
+        st.markdown("**Semestre:** 2026-1")
+    with col_c:
+        st.markdown("**Docente:** LUIS ALEXANDER APONTE ROJAS")
+        st.markdown("**Estudiante(s):** [ESCRIBE TU NOMBRE COMPLETO AQUÍ]") 
+        st.markdown("**Institución:** Corporación Universitaria Minuto de Dios")
+
+st.divider()
+
+# Menú de Navegación Principal
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    "1. Contexto y Problema", 
+    "2. Aristóteles en la Planta", 
+    "3. Kant y la Ergonomía", 
+    "4. Índices y Capacidades", 
+    "5. Simulador Ético",
+    "6. Conclusión y APA 7"
+])
+
+with tab1:
+    st.markdown("### El algoritmo incompleto de la productividad")
     
-    st.divider()
-    
-    col1, col2 = st.columns([1.5, 1])
+    col1, col2 = st.columns([1.2, 1])
     with col1:
-        st.markdown("### Introducción: El algoritmo incompleto de la productividad")
         st.markdown("""
         <div class="justified-text">
-        Durante décadas, la ingeniería industrial ha sido definida como la ciencia de la optimización. Tradicionalmente, se nos enseña a medir el éxito mediante indicadores estrictos de rendimiento y reducción de costos. Sin embargo, cuando reducimos la organización a una mera máquina de maximizar beneficios, el sistema queda incompleto.
+        Históricamente, la ingeniería industrial ha sido conceptualizada como la disciplina de la optimización estricta. En el entorno académico y corporativo, el éxito gerencial se mide a través de la maximización del rendimiento, la reducción de mermas y la compresión de costos operativos.
         <br><br>
-        Como señalan <strong>Adela Cortina y Emilio Martínez</strong>, la actividad profesional no puede desvincularse de su dimensión moral sin perder su legitimidad social. Si tratamos a las personas como meros insumos, caemos en la instrumentalización. En este espacio interactivo exploraremos un nuevo paradigma: <span class="highlight">la optimización centrada en la dignidad humana</span>.
+        No obstante, cuando el ecosistema organizacional se reduce a un modelo matemático puramente transaccional, la ecuación queda gravemente incompleta. Apoyándonos en los postulados de <strong>Adela Cortina y Emilio Martínez</strong>, sostenemos que ninguna actividad profesional puede desvincularse de su dimensión moral sin perder su legitimidad social.
+        <br><br>
+        Tratar al capital humano como un mero insumo estadístico conduce a la instrumentalización sistemática. Este documento interactivo plantea un cambio de paradigma para la Alta Dirección: <span class="highlight">la optimización centrada en la dignidad humana como base de la sostenibilidad operativa.</span>
         </div>
         """, unsafe_allow_html=True)
     with col2:
-        # Imagen representativa (Stock libre de uso)
-        st.image("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", caption="La Industria 4.0 exige una Ética Profesional 4.0")
+        st.image("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", caption="La Industria 4.0 exige un liderazgo ético.", use_container_width=True)
 
-elif seccion == "2. El 'Bien Interno'":
-    st.title("1. El 'Bien Interno' de la Ingeniería Industrial")
+with tab2:
+    st.markdown("### El 'Bien Interno' de la Ingeniería Industrial")
     st.markdown("""
     <div class="justified-text">
-    Para comprender la ética de nuestra profesión, debemos recuperar la distinción aristotélica explicada por Adela Cortina entre <em>bienes internos</em> y <em>bienes externos</em>. 
-    El error de muchas empresas contemporáneas es sacrificar el sentido de su profesión por acumular métricas financieras.
-    </div><br>
+    La ética profesional, desde la óptica de Adela Cortina, rescata la diferenciación aristotélica fundamental entre <em>bienes internos</em> y <em>bienes externos</em>. La crisis de muchas corporaciones contemporáneas radica en el sacrificio sistémico de su propósito fundacional en aras de acumular métricas financieras a corto plazo.
+    </div>
     """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
     
     c1, c2 = st.columns(2)
     with c1:
-        st.success("### 🛡️ Bienes Internos")
-        st.write("**La meta social que da sentido y legitimidad a la profesión.**")
-        st.write("✅ Crear sistemas de trabajo seguros y ergonómicos.")
-        st.write("✅ Armonizar la viabilidad técnica con el bienestar social.")
-        st.write("✅ Innovar para facilitar la vida humana, no para precarizarla.")
+        st.info("#### 🛡️ Bienes Internos (El Fin)")
+        st.write("La meta social que legitima a la ingeniería industrial:")
+        st.markdown("""
+        - Crear ecosistemas de trabajo seguros y ergonómicos.
+        - Armonizar la viabilidad técnica con el desarrollo integral del trabajador.
+        - Innovar tecnológicamente para facilitar la existencia, no para precarizarla.
+        """)
     with c2:
-        st.warning("### 💰 Bienes Externos")
-        st.write("**Lo que se obtiene como añadidura (medios, no fines).**")
-        st.write("⚠️ Dinero y utilidad neta de la planta.")
-        st.write("⚠️ Estatus, poder en el mercado y prestigio empresarial.")
+        st.warning("#### 💰 Bienes Externos (Los Medios)")
+        st.write("Lo que se obtiene como consecuencia, pero que no justifica el todo:")
+        st.markdown("""
+        - Utilidad operativa y márgenes netos.
+        - Posicionamiento de mercado y valor de la acción.
+        - Estatus corporativo de la gerencia.
+        """)
 
-    st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("""
     <div class="quote-box">
-    "Cuando un director de operaciones sacrifica la salud física de sus operarios para aumentar un margen de ganancia a corto plazo, está corrompiendo la profesión. La verdadera excelencia radica en diseñar procesos donde la eficiencia sea el vehículo para la dignificación."
+    "Corromper la profesión ocurre cuando un Director de Operaciones vulnera la salud física de sus colaboradores para cumplir la meta trimestral del OEE. La excelencia profesional (Areté) consiste en diseñar arquitecturas de procesos donde la eficiencia sea un vehículo para el bienestar colectivo."
     </div>
     """, unsafe_allow_html=True)
 
-elif seccion == "3. Más allá de Taylor (Kant)":
-    st.title("2. Más allá de Taylor: El Trabajador como Fin en Sí Mismo")
+with tab3:
+    st.markdown("### Más allá de Taylor: El Trabajador como Fin en Sí Mismo")
     st.markdown("""
     <div class="justified-text">
-    El taylorismo clásico y la administración científica del siglo XX trataron de convertir al obrero en una simple extensión mecánica de la máquina. La <strong>ética deontológica de Immanuel Kant</strong> dinamita esta perspectiva al recordarnos que <em>"las cosas tienen precio, pero las personas tienen dignidad"</em>.
+    El paradigma de la administración científica del siglo XX (Taylorismo) asumió al operario como una extensión mecánica, sustituible y exenta de capacidad volitiva. La <strong>ética deontológica de Immanuel Kant</strong> deconstruye esta visión mediante el imperativo categórico: <em>"Las cosas tienen precio y son intercambiables; las personas tienen dignidad y valor absoluto"</em>.
     <br><br>
-    En la ingeniería industrial moderna, este imperativo categórico nos exige evolucionar en tres frentes fundamentales:
+    La ingeniería moderna debe materializar este principio filosófico en tres áreas críticas de diseño operacional:
     </div><br>
     """, unsafe_allow_html=True)
     
-    # Uso de Tabs interactivos de Streamlit para organizar información profesional
-    tab1, tab2, tab3 = st.tabs(["🧍 Ergonomía Proactiva", "🧠 Sistemas Sociotécnicos", "🤖 Automatización Ética"])
-    with tab1:
-        st.subheader("Ergonomía Proactiva")
-        st.write("Consiste en no diseñar puestos de trabajo que destruyan la salud física del operario a mediano o largo plazo. La visión antiética asume que el trabajador es 'desechable' y que simplemente 'se puede contratar a otro'. Un ingeniero ético previene el daño desde la concepción del plano.")
-    with tab2:
-        st.subheader("Sistemas Sociotécnicos")
-        st.write("Es el diseño de líneas de montaje que permitan al trabajador mantener un control cognitivo sobre su tarea. Evita la alienación extrema, la hiper-especialización monótona y promueve el aprendizaje y el desarrollo integral humano dentro de la fábrica.")
-    with tab3:
-        st.subheader("Automatización Ética")
-        st.write("La Inteligencia Artificial y la robótica no deben verse únicamente como vías rápidas para el despido masivo o la reducción de nómina, sino como herramientas para liberar al ser humano de tareas peligrosas, sucias y monótonas (Las 3 D's de la robótica: *Dull, Dirty, Dangerous*).")
+    col_k1, col_k2, col_k3 = st.columns(3)
+    with col_k1:
+        st.markdown("#### 🧍 Ergonomía Proactiva")
+        st.write("Cese del diseño de estaciones de trabajo que generen enfermedades musculoesqueléticas a mediano plazo. La ética exige mitigar el riesgo desde los planos de ingeniería, eliminando la concepción del trabajador como 'material desechable'.")
+    with col_k2:
+        st.markdown("#### 🧠 Sistemas Sociotécnicos")
+        st.write("Estructuración de líneas de ensamble que prevengan la alienación cognitiva. El diseño debe permitir autonomía, rotación inteligente, y el fomento del desarrollo intelectual en la planta (ej. Círculos de Calidad / Kaizen).")
+    with col_k3:
+        st.markdown("#### 🤖 Automatización Ética")
+        st.write("La implementación de Robótica e Inteligencia Artificial no debe enfocarse exclusivamente en la liquidación de nóminas, sino en la eliminación de tareas 'Dull, Dirty, and Dangerous' (monótonas, sucias y peligrosas).")
 
-elif seccion == "4. Enfoque de Capacidades":
-    st.title("3. Del indicador OEE a las 'Capacidades'")
-    st.markdown("En su obra *Crear capacidades*, **Martha Nussbaum** critica a los economistas que miden el progreso de una nación solo a través del PIB. Nosotros proponemos llevar esa crítica a la industria y sustituir métricas puramente utilitarias por el **Índice de Capacidades Industriales (ICI)**.")
+with tab4:
+    st.markdown("### Del utilitarismo de métricas al 'Enfoque de Capacidades'")
+    st.markdown("""
+    <div class="justified-text">
+    Martha Nussbaum y Amartya Sen exponen las falacias de medir el desarrollo de una nación exclusivamente mediante el PIB. Transpolando esta teoría a la gerencia, medir el éxito de una planta solo con el <strong>OEE (Eficiencia General de los Equipos)</strong> oculta realidades operativas de precarización.
+    Proponemos un <strong>Índice de Capacidades Industriales (ICI)</strong>, donde la eficiencia esté supeditada a las "capacidades centrales" del ser humano.
+    </div><br>
+    """, unsafe_allow_html=True)
     
-    # Uso de Métricas interactivas visuales
-    col_metric1, col_metric2, col_metric3 = st.columns(3)
-    col_metric1.metric("Enfoque Tradicional", "Max. Rentabilidad", "- Salud Humana")
-    col_metric2.metric("Nuevo Paradigma Ético", "Desarrollo Humano", "+ Sostenibilidad a Largo Plazo")
-    col_metric3.metric("Indicador Propuesto", "Índice de Capacidades (ICI)", "10 Variables de Nussbaum")
-
-    st.markdown("### Tabla de Aplicación de las Capacidades Centrales en la Industria")
+    st.markdown("#### Matriz de Transición Ética-Operativa")
     data = {
-        "Capacidad de Nussbaum": [
-            "1. Vida y Salud Corporal", 
+        "Capacidad Central (M. Nussbaum)": [
+            "1. Vida, Salud Corporal e Integridad", 
             "2. Sentidos, Imaginación y Pensamiento", 
             "3. Razón Práctica", 
-            "4. Afiliación"
+            "4. Afiliación y Entorno"
         ],
-        "Aplicación Directa en Dirección Industrial": [
-            "Espacios libres de riesgos químicos/mecánicos; ergonomía preventiva integral.", 
-            "Capacitación continua; fomento de la filosofía Kaizen (que el obrero proponga mejoras).", 
-            "Autonomía y empoderamiento en la toma de decisiones del puesto (Empowerment).",
-            "Fomento del trabajo en equipo, diálogo sindical libre y cero tolerancia al acoso."
+        "Traducción a la Dirección Industrial": [
+            "Ambientes con cero exposición a tóxicos; políticas estrictas contra el acoso laboral.", 
+            "Planes de carrera técnicos; libertad de expresión para proponer rediseños de procesos.", 
+            "Empoderamiento (Empowerment); que el operario participe en la organización de su labor.",
+            "Respeto absoluto al sindicalismo legal; fomento de redes de apoyo interdepartamental."
         ]
     }
     df = pd.DataFrame(data)
     st.dataframe(df, hide_index=True, use_container_width=True)
+    
+    st.caption("Nota: La aplicación de este marco genera altos niveles de retención de talento y disminuye drásticamente el ausentismo, haciendo de la ética una ventaja competitiva.")
 
-elif seccion == "5. Ética Discursiva":
-    st.title("4. Ética Discursiva en Decisiones Estratégicas")
+with tab5:
+    st.markdown("### 🎮 Simulador de Toma de Decisiones Estratégicas")
+    st.markdown("Evalúe su criterio gerencial frente a un escenario operativo real. Seleccione su curso de acción para obtener retroalimentación fundamentada en los marcos teóricos abordados.")
+    
+    st.error("**El Caso de la 'Línea de Ensamblaje B'**")
     st.markdown("""
-    <div class="justified-text">
-    ¿Qué ocurre cuando una empresa se enfrenta a una gran reestructuración tecnológica? 
-    Ante recortes, traslados o despidos por automatización, la <strong>Ética del Discurso de Jürgen Habermas</strong> establece que una decisión solo es válida si cuenta con el consenso de los afectados, tras un diálogo celebrado en condiciones de simetría (sin coacción corporativa).
-    </div>
-    """, unsafe_allow_html=True)
+    **Contexto:** Usted asume como Director de Operaciones. Descubre que la maquinaria de la Línea B genera una frecuencia de vibración que está *justo en el límite legal de las normas estatales*. Sin embargo, un estudio privado reciente de ingeniería biomédica (que solo usted conoce) indica que, a largo plazo, esta vibración causará micro-lesiones nerviosas irreversibles en sus operarios. 
+    Cambiar los motores solucionaría el problema, pero reduciría la rentabilidad del trimestre en un 12%, anulando los bonos de cumplimiento de la junta directiva y el suyo propio.
+    """)
     
-    st.info("💡 **El Rol Estratégico del Ingeniero:** El ingeniero ético no impone normas o rediseños desde su escritorio; actúa como un facilitador. Crea mesas de diálogo con operarios, sindicatos y comunidades, logrando equilibrar la *ética de la convicción* (nuestro deseo de ser eficientes) con la *ética de la responsabilidad* (asumir el impacto social de nuestras decisiones).")
-
-elif seccion == "6. 🎮 Dilema Interactivo":
-    st.title("Simulador: Resolución de un Dilema Ético")
-    st.write("Pon a prueba tu criterio ético frente a una situación real de ingeniería y dirección de operaciones. Elije tu respuesta para ver la retroalimentación del sistema.")
-    
-    st.markdown("### El Caso de la 'Línea de Ensamblaje B'")
-    st.warning("**Contexto:** Eres el Director de Operaciones. Acabas de descubrir que la maquinaria de la Línea B genera un nivel de vibración que, aunque está *justo en el límite legal permitido*, sabes por estudios recientes que está causando estrés crónico y micro-lesiones en tus operarios a largo plazo. Cambiar los motores protegería a tu equipo, pero reduciría la rentabilidad del trimestre en un 12%, afectando los bonos de fin de año de toda la gerencia (incluido el tuyo).")
-    
-    # Widget interactivo de decisión
     opcion = st.radio(
-        "¿Qué decisión tomas basándote en la Ética Profesional?",
-        ["(Selecciona una opción para continuar)",
-         "A) Mantener la maquinaria igual. Es 100% legal y mi deber principal como gerente es maximizar la rentabilidad de la empresa a corto plazo.", 
-         "B) Ocultar los estudios recientes y rotar al personal rápidamente de estación para que no se note el desgaste físico, evadiendo responsabilidades.", 
-         "C) Detener/modificar la línea e invertir en los motores. La salud humana tiene dignidad, no precio. Se reajustarán las metas de rentabilidad."]
+        "**Como líder, ¿qué determinación toma?**",
+        ["(Seleccione una estrategia)",
+         "A) Estrategia Utilitarista: Mantener la maquinaria igual. Es legalmente defendible y mi deber principal es asegurar el dividendo de los accionistas y los bonos de mi equipo directivo.", 
+         "B) Estrategia de Evasión: Ocultar el estudio biomédico y aumentar la velocidad de rotación del personal en la Línea B para que los síntomas tarden más en manifestarse.", 
+         "C) Estrategia Ética-Discursiva: Convocar a los representantes de los operarios, exponer el hallazgo transparentemente y detener la línea para invertir en nuevos motores, asumiendo el impacto financiero temporal."]
     )
     
     if opcion.startswith("A)"):
-        st.error("❌ **Incoherente con la Ética Profesional.** Estás utilizando a las personas como un mero medio para un fin económico (violación del imperativo categórico de Kant) y estás priorizando un bien externo (dinero/bono) sobre el bien interno de tu profesión.")
+        st.warning("❌ **Alerta Ética:** Su decisión es legal, pero no ética. Está instrumentalizando al capital humano como medio para un fin financiero (violación deontológica) y priorizando un 'bien externo' sobre el propósito genuino de la profesión.")
     elif opcion.startswith("B)"):
-        st.error("❌ **Falta Ética Grave.** Además de instrumentalizar al trabajador, estás incurriendo en dolo y violando la transparencia y la ética discursiva al negarles información vital sobre su propia salud.")
+        st.error("❌ **Falla Ética Crítica:** Usted ha incurrido en dolo por omisión. Está violando el principio de la ética discursiva (Habermas) al negar información vital a los afectados y destruyendo la capacidad de 'Salud Corporal' (Nussbaum).")
     elif opcion.startswith("C)"):
-        st.success("✅ **¡Decisión Ética Correcta!** Actúas protegiendo el 'Bien Interno' de la profesión y fomentas la capacidad de 'Salud Corporal' (Martha Nussbaum). Como profesional, asumes tu responsabilidad social, incluso por encima de beneficios personales a corto plazo.")
-        st.balloons() # Animación visual de celebración
+        st.success("✅ **Liderazgo Excepcional:** Su resolución es congruente con la ética profesional. Actúa como facilitador a través de la Ética del Discurso (Habermas/Cortina), protegiendo la dignidad humana y asegurando la sostenibilidad reputacional y operativa a largo plazo.")
+        st.balloons()
 
-elif seccion == "7. Conclusión y Referencias":
-    st.title("Conclusión General")
+with tab6:
+    st.markdown("### Conclusión Estratégica")
     st.success("""
-    **Optimizamos procesos para que la vida florezca, no para que la dignidad se deprecie.** 
+    **Optimizamos procesos operativos para que la vida prospere, no para depreciar la dignidad.** 
     
-    Integrar la ética profesional en el entorno industrial moderno no es un acto de caridad corporativa, es la única estrategia viable para la sostenibilidad, la innovación genuina y la obtención de la *licencia social* para operar. Para nosotros como estudiantes y futuros líderes, el reto es diseñar sistemas donde la tecnología y la eficiencia potencien la libertad humana en lugar de coartarla.
+    La convergencia entre la ética profesional y la ingeniería industrial no representa una limitante para la competitividad, sino el estándar evolutivo de la Industria 4.0. Las organizaciones que ignoran el componente humano y filosófico en el diseño de sus operaciones enfrentan riesgos catastróficos de rotación, demandas y colapso reputacional. El verdadero desafío del ingeniero es equilibrar la exactitud matemática con la profunda responsabilidad de cuidar la red humana que sostiene el aparato productivo.
     """)
     
     st.divider()
-    st.subheader("📚 Referencias Bibliográficas (Normas APA 7)")
+    st.markdown("### 📚 Referencias Bibliográficas (Normas APA 7.ª Edición)")
     st.markdown("""
-    * Cortina, A., & Martínez Navarro, E. (2001). *Ética*. Ediciones Akal.
     * Correa Casanova, M., & Martínez Becerra, P. (Eds.). (2010). *La riqueza ética de las profesiones*. RIL Editores.
+    * Cortina, A., & Martínez Navarro, E. (2001). *Ética*. Ediciones Akal.
+    * Kant, I. (2012). *Fundamentación para una metafísica de las costumbres* (R. R. Aramayo, Trad.). Alianza Editorial. (Obra original publicada en 1785).
     * Nussbaum, M. C. (2012). *Crear capacidades: Propuesta para el desarrollo humano*. Paidós.
     * Sen, A. (2000). *Desarrollo y libertad*. Editorial Planeta.
-    * Kant, I. (2012). *Fundamentación para una metafísica de las costumbres* (R. R. Aramayo, Trad.). Alianza Editorial. (Obra original publicada en 1785).
     """)
+    
+    st.caption("Desarrollado en Python / Streamlit Framework. Proyecto académico para la Corporación Universitaria Minuto de Dios.")
