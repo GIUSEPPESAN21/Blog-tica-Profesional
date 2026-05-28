@@ -127,16 +127,14 @@ with st.expander("🎓 Información Académica - Proyecto Final (Clic para expan
     st.markdown("""
     <div style="padding: 10px; border-radius: 8px; background-color: #f8fafc;">
     """, unsafe_allow_html=True)
-    col_a, col_b, col_c = st.columns([1, 2, 2])
-    with col_a:
-        st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Uniminuto_logo.svg/1200px-Uniminuto_logo.svg.png", width=140)
-    with col_b:
+    col_1, col_2 = st.columns(2)
+    with col_1:
         st.markdown("**Materia:** Ética Profesional")
         st.markdown("**NRC:** 10-84364")
         st.markdown("**Semestre:** 2026-1")
-    with col_c:
+    with col_2:
         st.markdown("**Docente:** LUIS ALEXANDER APONTE ROJAS")
-        st.markdown("**Estudiante:** [ESCRIBE TU NOMBRE COMPLETO AQUÍ]") 
+        st.markdown("**Estudiante:** Joseph Javier Sánchez Acuña") 
         st.markdown("**Institución:** Corporación Universitaria Minuto de Dios")
     st.markdown("</div>", unsafe_allow_html=True)
 
